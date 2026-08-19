@@ -1,34 +1,14 @@
-import {useState, useEffect} from 'react';
-import { getPosts, getRandomUser } from './api';
-import PostCard from './componentsapi/postcard';
-import UserCard from './componentsapi/UserCard';
-import './App.css';
-
+import Item from './components/item'
+import Cart from './components/Cart'
+import "./App.css";
 function App() {
-  const [data, setData] = useState(null);
-  const [userData, setUserData] = useState(null);
-  useEffect(() => {
-    getPosts().then((posts) => setData(posts));
-  },[]);
-  useEffect(() =>{
-    getRandomUser().then((user) => setUserData(user.results[0]));
-
-  },[]);
-
-  const refresh = () =>{
-    getRandomUser().then((user) => setUserData(user.results[0]));
-
-  }
-  return(
-    <div className='App'>
-      {userData && <UserCard data={userData}/>}
-      <button onClick={refresh}>Refresh User</button>
-      {data ? data.map((e) => <PostCard title={e.title} body={e.body} />): <p>No Data</p>}
+  return (
+    <div className="App">
+      <Item name="Macbook" price='100000'/>
+      <Item name="Pendrive" price='4000'/>
+      <Item name="Charger" price='1000'/>
+      <Cart />
     </div>
-  );
-
-    
-  
-};
-
+  )
+}
 export default App;
